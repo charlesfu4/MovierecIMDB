@@ -1,7 +1,7 @@
 # MovierecIMDB
 A movie recommendation service base on IMDB scores. :clapper:
 #### Progress:
-- [x] First: Recommend 5 related movies base on [Rotten Tomatoes](https://www.rottentomatoes.com/)
+- [ ] First: Recommend 5 related movies base on [Rotten Tomatoes](https://www.rottentomatoes.com/)
 
 - [ ] Second: Recommend movies base on user selected ranking sources
 
