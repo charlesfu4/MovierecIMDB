@@ -1,7 +1,7 @@
 # MovierecIMDB
-A movie recommendation service base on IMDB scores. :clapper:
+A python-based json list movie recommendation service base on IMDB scores. :clapper:
 #### Progress:
-- [ ] First: Recommend 5 related movies base on [Rotten Tomatoes](https://www.rottentomatoes.com/)
+- [x] First: Recommend 3 related movies base on [Rotten Tomatoes](https://www.rottentomatoes.com/)
 
 - [ ] Second: Recommend movies base on user selected ranking sources
 

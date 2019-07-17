@@ -7,7 +7,7 @@ def get_movies_from_tastedive(name):
     param_dict['k'] = '340176-movierec-3PBXNWIB'
     param_dict['q'] = name
     param_dict['type'] = "movie"
-    param_dict['limit'] = 5
+    param_dict['limit'] = 3
     res = requests.get(baseurl, params = param_dict)
     return res.json()
 
@@ -36,24 +36,21 @@ def get_movie_data(name):
     return res.json()
 
 
-def get_movie_rating(js):
-    rate_s = ""
-    for dic in js['Ratings']:
-        if("Rotten Tomatoes" in dic.values()):
-            rate_s = dic['Value']
-    if rate_s == "":
-        rate = 0
-        return rate
-    rate = int(rate_s[:-1])
+def get_movie_rating(mvdatalst):
+    rate = {}
+    for mvdata in mvdatalst:
+        for dic in mvdata['Ratings']:
+            if("Rotten Tomatoes" in dic.values()):
+                rate[mvdata['Title']] = int(dic['Value'][:-1])
+                break
+            else:
+                rate[mvdata['Title']] = 0
+        
     return rate
+            
 
-def get_sorted_recommendations(title_lst):
-    g_lst = get_related_titles(title_lst)
-    dic_m_r = {}
-    for name in g_lst:
-        if(name not in dic_m_r):
-            dic_m_r[name] = get_movie_rating(get_movie_data(name))
-    s_lst = sorted(dic_m_r, key = lambda x : (dic_m_r[x],x), reverse = True)
+def sorted_mv(rate):
+    s_lst = sorted(rate, key = lambda x : (rate[x],x), reverse = True)
 
     return s_lst
 
