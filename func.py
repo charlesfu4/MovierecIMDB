@@ -4,11 +4,11 @@ import json
 def get_movies_from_tastedive(name):
     baseurl = "https://tastedive.com/api/similar"
     param_dict = {}
+    param_dict['k'] = '340176-movierec-3PBXNWIB'
     param_dict['q'] = name
-    param_dict['type'] = "movies"
+    param_dict['type'] = "movie"
     param_dict['limit'] = 5
     res = requests.get(baseurl, params = param_dict)
-    print(res.url)
     return res.json()
 
 def extract_movie_titles(js):
