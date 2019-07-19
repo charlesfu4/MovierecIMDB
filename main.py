@@ -7,10 +7,14 @@ titles = func.extract_movie_titles(js)
 mv_list = func.get_related_titles(titles)
 
 mv_data = [func.get_movie_data(mv) for mv in mv_list]
-#print(json.dumps(mv_data, indent = 2))
-rate_lst = func.get_movie_rating(mv_data)
+print(json.dumps(mv_data, indent = 2))
+
+source = input("Pick a ranking source in the following list for recoomendation..")
+rate_lst = func.get_movie_rating(mv_data, source)
+
 print(rate_lst)
 rank_lst = func.sorted_mv(rate_lst)
+
 print('The recommended movies are listed from highest score to lowest as following:')
 count = 0
 for mv in rank_lst:
