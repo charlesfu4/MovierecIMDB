@@ -35,18 +35,38 @@ def get_movie_data(name):
     res = requests.get(baseurl, param_dict)
     return res.json()
 
+def ex_ratemd(js):
+    rate_lab = []
+    for mvdata in js:
+        ratepak = mvdata["Ratings"]
+        for rt in ratepak:
+            if rt["Source"] not in rate_lab:
+                rate_lab.append(rt["Source"])
+            else:
+                continue
+    return rate_lab
+
 
 def get_movie_rating(mvdatalst,source): 
     rate = {}
     for mvdata in mvdatalst:
         if 'Ratings' in mvdata.keys():
             for dic in mvdata['Ratings']:
-                if(source in dic.values()):
+                if(source in dic.values() and source == 'Rotten Tomatoes'):
                     rate[mvdata['Title']] = int(dic['Value'][:-1])
                     break
+                elif(source in dic.values() and source == 'Internet Movie Database'):
+                    rate[mvdata['Title']] = float(dic['Value'][:-3])
+                    break
+             
+                elif(source in dic.values() and source == 'Metacritic'):
+                    rate[mvdata['Title']] = int(dic['Value'][:-4])
+                    break
+
                 else:
                     rate[mvdata['Title']] = 0
-        
+
+      
     return rate
             
 
